@@ -10,10 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "azure-ad-jwt": "^0.2.0",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
-    "mongoose": "^4.8.6"
+    "http": "0.0.0",
+    "mongojs": "^2.4.0",
+    "mongoose": "^4.8.6",
+    "nodemon": "^1.11.0"
   }
 }

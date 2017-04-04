@@ -3,8 +3,11 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 //var lims = require('./routes/lims');
 //console.log(lims);
-
+var mongojs = require('mongojs');
+var lims = require('./routes/lims');
+app.use('/lims',lims);
 var db = mongoose.connect('webtechdevops.centralindia.cloudapp.azure.com:51003/lims');
+var db2 = mongojs('webtechdevops.centralindia.cloudapp.azure.com:51003/lims', ['usersDB', 'issuedBooksDB', 'returnedBooksDB', 'booksDB', 'rolesAndPermissionDB', 'categoriesDB', 'requestedDB', 'booksToBeReturnedDB']);
 
 var MindsData = require('./models/bookModel');
 var NewLimsModel = require('./models/newlimsModel');
@@ -166,6 +169,56 @@ app.route('/recommend/:mId').get(function (req, res, next) {
                 });
         });
 });
+
+
+// //getAllBooks api
+// app.route('/getAllBooks').get( function (req, res) {
+    
+//             db2.booksDB.find(function (err, docs) {
+//                 //console.log(docs);
+//                 res.header("Access-Control-Allow-Origin", "*");
+//                 res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//                 res.send(docs);
+//             });
+//     });
+
+// //getCategories api
+// app.route('/getCategories').get( function (req, res) {
+   
+    
+       
+//             db.categoriesDB.find({}, function (err, docs) {
+//                 res.header("Access-Control-Allow-Origin", "*");
+//                 res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//                 res.send(docs); //sending the response back to application
+//             });
+        
+        
+// });
+
+// //getCategoryWiseBooks api
+// app.route('/getCategoryWiseBooks/:selectedCategory', function (req, res) {
+//     var category = req.params.selectedCategory;
+//     console.log(req.headers.authorization);
+//     var jwtToken = req.headers.authorization.split(" ");
+//     aad.verify(jwtToken[1], null, function (err, result) {
+//         if (result) {
+//             console.log(category);
+//             var data = '{"genre":"' + category + '"}';
+//             db.booksDB.find(JSON.parse(data), {}, function (err, docs) {
+//                 console.log("category books" + docs[0]);
+//                 res.header("Access-Control-Allow-Origin", "*");
+//                 res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//                 res.send(docs);
+//             });
+//         }
+//         else {
+//             console.log("JWT is invalid: " + err);
+//             res.send("403 : ACCESS FORBIDDEN");
+//         }
+
+//     });
+// });
 
 app.get('/', function (req, res) {
     isbn = "9781451648546";

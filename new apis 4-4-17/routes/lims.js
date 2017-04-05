@@ -950,34 +950,34 @@ app.post('/addNewCopy', function (req, res) {
 
 // });
 /**Web-api*** */
-// app.get('/getAllBooks', function (req, res) {
-//     console.log(req.headers.authorization);
-//     var jwtToken = req.headers.authorization.split(" ");
-//     aad.verify(jwtToken[1], null, function (err, result) {
-//         if (result) {
-//             db.booksDB.find(function (err, docs) {
-//                 //console.log(docs);
-//                 res.header("Access-Control-Allow-Origin", "*");
-//                 res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//                 res.send(docs);
-//             });
-//         }
-//         else {
-//             console.log("JWT is invalid: " + err);
-//             res.send("403 : ACCESS FORBIDDEN");
-//         }
-
-//     });
-// });
 app.get('/getAllBooks', function (req, res) {
-    
+    console.log(req.headers.authorization);
+    var jwtToken = req.headers.authorization.split(" ");
+    aad.verify(jwtToken[1], null, function (err, result) {
+        if (result) {
             db.booksDB.find(function (err, docs) {
                 //console.log(docs);
                 res.header("Access-Control-Allow-Origin", "*");
                 res.header("Access-Control-Allow-Headers", "X-Requested-With");
                 res.send(docs);
             });
-        });
+        }
+        else {
+            console.log("JWT is invalid: " + err);
+            res.send("403 : ACCESS FORBIDDEN");
+        }
+
+    });
+});
+// app.get('/getAllBooks', function (req, res) {
+    
+//             db.booksDB.find(function (err, docs) {
+//                 //console.log(docs);
+//                 res.header("Access-Control-Allow-Origin", "*");
+//                 res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//                 res.send(docs);
+//             });
+//         });
 
 app.get('/getMyFavGenre/:uId', function (req, res) {
     var mid = req.params.uId;
